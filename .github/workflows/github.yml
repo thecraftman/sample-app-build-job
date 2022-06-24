@@ -10,7 +10,7 @@ jobs:
       # { DEPLOYMENT STEP }
       - name: 'Report Deployment Succeeded'
         if: ${{ success() }}
-        uses: cto-ai/action@v1.2
+        uses: cto-ai/action@v1-beta
         id: ctoai-action
         with:
           team_id: ${{ secrets.CTOAI_TEAM }}
@@ -19,8 +19,8 @@ jobs:
           event_action: "succeeded"
       - name: 'Report Deployment Failed'
         if: ${{ failure() }}
-        uses: cto-ai/action@v1.2
-        # id: ctoai-action
+        uses: cto-ai/action@v1-beta
+        id: ctoai-build-failed
         with:
           team_id: ${{ secrets.CTOAI_TEAM }}
           token: ${{ secrets.CTOAI_TOKEN }}
