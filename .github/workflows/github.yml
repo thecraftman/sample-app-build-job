@@ -1,0 +1,28 @@
+name: Deployment Metrics
+on:
+  push:
+    branches:
+      - main
+jobs:
+  ctoai-metrics:
+    runs-on: ubuntu-latest
+    steps:
+      # { DEPLOYMENT STEP }
+      - name: 'Report Deployment Succeeded'
+        if: ${{ success() }}
+        uses: cto-ai/action@v1.2
+        id: ctoai-action
+        with:
+          team_id: ${{ secrets.CTOAI_TEAM }}
+          token: ${{ secrets.CTOAI_TOKEN }}
+          event_name: "deployment"
+          event_action: "succeeded"
+      - name: 'Report Deployment Failed'
+        if: ${{ failure() }}
+        uses: cto-ai/action@v1.2
+        id: ctoai-action
+        with:
+          team_id: ${{ secrets.CTOAI_TEAM }}
+          token: ${{ secrets.CTOAI_TOKEN }}
+          event_name: "deployment"
+          event_action: "failed"
