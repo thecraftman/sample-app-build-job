@@ -20,7 +20,7 @@ jobs:
       - name: 'Report Deployment Failed'
         if: ${{ failure() }}
         uses: cto-ai/action@v1.2
-        id: ctoai-action
+        # id: ctoai-action
         with:
           team_id: ${{ secrets.CTOAI_TEAM }}
           token: ${{ secrets.CTOAI_TOKEN }}
