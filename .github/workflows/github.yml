@@ -10,19 +10,19 @@ jobs:
     name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v1.2
     - name: Use Node.js ${{ env.NODE_VERSION }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v1.2
       with:
         node-version: ${{ env.NODE_VERSION }}
     - name: Report Deployment Succeeded
       if: ${{ failure() }}
       uses: cto-ai/action@v1.2
-      id: ctoai-deployment-failure
+      id: ctoai-deployment-succeeded
       with:
         team_id: ${{ secrets.CTOAI_TEAM }}
         token: ${{ secrets.CTOAI_TOKEN}}
         event_name: "deployment"
-        event_action: "failure"
+        event_action: "succeeded"
         environment: "production"
 
