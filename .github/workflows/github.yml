@@ -15,13 +15,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ env.NODE_VERSION }}
-    - name: npm install, build, and test
-      run: |
-        # Build and test the project, then
-        # deploy to Azure Web App.
-        npm install
-        npm run build
-        npm run test
     - name: Report Deployment Succeeded
       if: ${{ success() }}
       uses: cto-ai/action@v1.2
