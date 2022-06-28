@@ -20,8 +20,8 @@ jobs:
       uses: cto-ai/action@v1.2
       id: ctoai-deployment-succeeded
       with:
-        team_id: ${{ secrets.CTOAI_TEAM_ID }}
-        token: ${{ secrets.CTOAI_EVENTS_API_TOKEN }}
+        team_id: ${{ secrets.CTOAI_TEAM }}
+        token: ${{ secrets.CTOAI_TOKEN}}
         event_name: "deployment"
         event_action: "succeeded"
         environment: "production"
