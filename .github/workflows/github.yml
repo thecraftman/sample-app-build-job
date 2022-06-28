@@ -16,13 +16,13 @@ jobs:
       with:
         node-version: ${{ env.NODE_VERSION }}
     - name: Report Deployment Succeeded
-      if: ${{ success() }}
+      if: ${{ failure() }}
       uses: cto-ai/action@v1.2
-      id: ctoai-deployment-succeeded
+      id: ctoai-deployment-failure
       with:
         team_id: ${{ secrets.CTOAI_TEAM }}
         token: ${{ secrets.CTOAI_TOKEN}}
         event_name: "deployment"
-        event_action: "succeeded"
+        event_action: "failure"
         environment: "production"
 
