@@ -22,25 +22,14 @@ jobs:
         npm install
         npm run build --if-present
         npm run test --if-present
-    - name: Report Build Succeeded
+    - name: Report Deployment Succeeded
       if: ${{ success() }}
-      uses: cto-ai/action@v1-beta
-      id: ctoai-build-succeeded
+      uses: cto-ai/action@v1.2
+      id: ctoai-deployment-succeeded
       with:
-        team_id: ${{ secrets.CTOAI_TEAM }}
-        token: ${{ secrets.CTOAI_TOKEN }}
-        stage: "Build"
-        status: "Succeeded"
-        change_id: "your-change-id1"
-        pipeline_id: "your-pipeline-id1"
-    - name: Report Build Failed
-      if: ${{ failure() }}
-      uses: cto-ai/action@v1-beta
-      id: ctoai-build-failure
-      with:
-        team_id: ${{ secrets.CTOAI_TEAM }}
-        token: ${{ secrets.CTOAI_TOKEN }}
-        stage: "Build"
-        status: "Failure"
-        change_id: "your-change-id1"
-        pipeline_id: "your-pipeline-id1"
+        team_id: ${{ secrets.CTOAI_TEAM_ID }}
+        token: ${{ secrets.CTOAI_EVENTS_API_TOKEN }}
+        event_name: "deployment"
+        event_action: "succeeded"
+        environment: "production"
+
