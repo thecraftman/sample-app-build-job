@@ -1,2 +1,2 @@
-# cto-ai-insights
-testing insights from acrtions
+# Insights
+testing insights from actions
