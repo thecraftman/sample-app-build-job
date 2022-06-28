@@ -16,7 +16,7 @@ jobs:
       with:
         node-version: ${{ env.NODE_VERSION }}
     - name: Report Deployment Succeeded
-      if: ${{ failure() }}
+      if: ${{ Succeeded() }}
       uses: cto-ai/action@v1.2
       id: ctoai-deployment-succeeded
       with:
