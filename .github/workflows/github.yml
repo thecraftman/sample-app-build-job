@@ -35,5 +35,5 @@ jobs:
         team_id: ${{ secrets.CTOAI_TEAM }}
         token: ${{ secrets.CTOAI_TOKEN }}
         event_name: "deployment"
-        event_action: "failed"
+        event_action: "failure"
         environment: "production"
