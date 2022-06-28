@@ -20,8 +20,8 @@ jobs:
         # Build and test the project, then
         # deploy to Azure Web App.
         npm install
-        npm run build --if-present
-        npm run test --if-present
+        npm run build
+        npm run test
     - name: Report Deployment Succeeded
       if: ${{ success() }}
       uses: cto-ai/action@v1.2
