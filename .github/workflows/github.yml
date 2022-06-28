@@ -10,6 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Report Deployment Failed
+      if: ${{ failure() }}
+      uses: cto-ai/action@v1.2
+      id: ctoai-deployment-failure
+      with:
+        team_id: ${{ secrets.CTOAI_TEAM }}
+        token: ${{ secrets.CTOAI_TOKEN }}
+        event_name: "deployment"
+        event_action: "failure"
     - name: Report Deployment Succeeded
       if: ${{ success() }}
       uses: cto-ai/action@v1.2
