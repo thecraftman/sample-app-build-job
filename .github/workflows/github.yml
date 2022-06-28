@@ -1,25 +1,36 @@
 
 name: Deployment Metrics
+
 on: [push, pull_request, pull_request_review, release]
 
 
-- name: Report Deployment Succeeded
-  if: ${{ success() }}
-  uses: cto-ai/action@v1.2
-  id: ctoai-deployment-succeeded
-  with:
-    team_id: ${{ secrets.CTOAI_TEAM }}
-    token: ${{ secrets.CTOAI_TOKEN }}
-    event_name: "deployment"
-    event_action: "succeeded"
-    environment: "production"
-- name: Report Deployment Failed
-  if: ${{ failure() }}
-  uses: cto-ai/action@v1.2
-  id: ctoai-deployment-failed
-  with:
-    team_id: ${{ secrets.CTOAI_TEAM }}
-    token: ${{ secrets.CTOAI_TOKEN }}
-    event_name: "deployment"
-    event_action: "failed"
-    environment: "production"
+jobs:
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+    - name: Report Build Succeeded
+      if: ${{ success() }}
+      uses: cto-ai/action@v1.2
+      id: ctoai-deployment-succeeded
+      with:
+        team_id: ${{ secrets.CTOAI_TEAM }}
+        token: ${{ secrets.CTOAI_TOKEN }}
+        event_name: "deployment"
+        event_action: "succeeded"
+        environment: "production"
+    - name: Report Deployment Failed
+      if: ${{ failure() }}
+      uses: cto-ai/action@v1.2
+      id: ctoai-deployment-failed
+      with:
+        team_id: ${{ secrets.CTOAI_TEAM }}
+        token: ${{ secrets.CTOAI_TOKEN }}
+        event_name: "deployment"
+        event_action: "failed"
+        environment: "production"
