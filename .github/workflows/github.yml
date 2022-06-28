@@ -1,4 +1,3 @@
-
 name: Deployment Metrics
 
 on: [push, pull_request, pull_request_review, release, pull_request_target]
@@ -10,23 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Report Deployment Failed
-      # if: ${{ failure() }}
+    - name: Report Deployment Succeeded
+    #   if: ${{ success() }}
       uses: cto-ai/action@v1.2
-      id: ctoai-deployment-failure
+      id: ctoai-deployment-Succeeded
       with:
         team_id: ${{ secrets.CTOAI_TEAM }}
         token: ${{ secrets.CTOAI_TOKEN }}
         event_name: "deployment"
-        event_action: "failure"
-    # - name: Report Deployment Succeeded
-    #   if: ${{ success() }}
-    #   uses: cto-ai/action@v1.2
-    #   id: ctoai-deployment-Succeeded
-    #   with:
-    #     team_id: ${{ secrets.CTOAI_TEAM }}
-    #     token: ${{ secrets.CTOAI_TOKEN }}
-    #     event_name: "deployment"
-    #     event_action: "Succeeded"
-      
-      
+        event_action: "succeeded"
