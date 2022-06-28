@@ -24,6 +24,9 @@ jobs:
         token: ${{ secrets.CTOAI_TOKEN }}
         stage: "Build"
         status: "Succeeded"
+        event_name: "deployment"
+        event_action: "succeeded"
+        branch: "main"
         change_id: "your-change-id1"
         pipeline_id: "your-pipeline-id1"
     - name: Report Build Failed
@@ -34,6 +37,8 @@ jobs:
         team_id: ${{ secrets.CTOAI_TEAM }}
         token: ${{ secrets.CTOAI_TOKEN }}
         stage: "Build"
+        event_name: "deployment"
+        event_action: "failure"
         status: "Failure"
         change_id: "your-change-id1"
         pipeline_id: "your-pipeline-id1"
