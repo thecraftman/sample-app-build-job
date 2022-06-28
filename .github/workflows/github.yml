@@ -2,7 +2,7 @@ name: Deployment Metrics
 on: [push, pull_request, pull_request_review, release]
 
 env:
-  NODE_VERSION: '13.x'
+  NODE_VERSION: '14.x'
 
 
 jobs:
@@ -36,11 +36,11 @@ jobs:
     - name: Report Build Failed
       if: ${{ failure() }}
       uses: cto-ai/action@v1-beta
-      id: ctoai-build-failed
+      id: ctoai-build-failure
       with:
         team_id: ${{ secrets.CTOAI_TEAM }}
         token: ${{ secrets.CTOAI_TOKEN }}
         stage: "Build"
-        status: "Failed"
+        status: "Failure"
         change_id: "your-change-id1"
         pipeline_id: "your-pipeline-id1"
