@@ -1,28 +1,46 @@
 name: Deployment Metrics
-on:
-  push:
-    branches:
-      - main
+on: [push, pull_request, pull_request_review, release]
+
+env:
+  NODE_VERSION: '13.x'
+
+
 jobs:
-  ctoai-metrics:
+  build-and-deploy:
+    name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
-      # { DEPLOYMENT STEP }
-      - name: 'Report Deployment Succeeded'
-        if: ${{ success() }}
-        uses: cto-ai/action@v1.2
-        id: ctoai-deployment-succeeded
-        with:
-          team_id: ${{ secrets.CTOAI_TEAM }}
-          token: ${{ secrets.CTOAI_TOKEN }}
-          event_name: "deployment"
-          event_action: "succeeded"
-      - name: 'Report Deployment Failed'
-        if: ${{ failure() }}
-        uses: cto-ai/action@v1.2
-        id: ctoai-deployment-failure
-        with:
-          team_id: ${{ secrets.CTOAI_TEAM }}
-          token: ${{ secrets.CTOAI_TOKEN }}
-          event_name: "deployment"
-          event_action: "failure"
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+    - name: npm install, build, and test
+      run: |
+        # Build and test the project, then
+        # deploy to Azure Web App.
+        npm install
+        npm run build --if-present
+        npm run test --if-present
+    - name: Report Build Succeeded
+      if: ${{ success() }}
+      uses: cto-ai/action@v1-beta
+      id: ctoai-build-succeeded
+      with:
+        team_id: ${{ secrets.CTOAI_TEAM }}
+        token: ${{ secrets.CTOAI_TOKEN }}
+        stage: "Build"
+        status: "Succeeded"
+        change_id: "your-change-id1"
+        pipeline_id: "your-pipeline-id1"
+    - name: Report Build Failed
+      if: ${{ failure() }}
+      uses: cto-ai/action@v1-beta
+      id: ctoai-build-failed
+      with:
+        team_id: ${{ secrets.CTOAI_TEAM }}
+        token: ${{ secrets.CTOAI_TOKEN }}
+        stage: "Build"
+        status: "Failed"
+        change_id: "your-change-id1"
+        pipeline_id: "your-pipeline-id1"
