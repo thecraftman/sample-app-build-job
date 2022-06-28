@@ -21,7 +21,7 @@ jobs:
         event_action: "failure"
         repo: "prompt_res.repo"
     - name: Report Deployment Succeeded
-      if: ${{ failure() }}
+      if: ${{ success() }}
       uses: cto-ai/action@v1.2
       id: ctoai-deployment-Succeeded
       with:
