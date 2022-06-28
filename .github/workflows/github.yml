@@ -21,3 +21,16 @@ jobs:
         event_action: "failure"
         branch: "main"
         repo: "prompt_res.repo"
+    - name: Report Deployment Succeeded
+      if: ${{ failure() }}
+      uses: cto-ai/action@v1.2
+      id: ctoai-deployment-Succeeded
+      with:
+        team_id: ${{ secrets.CTOAI_TEAM }}
+        token: ${{ secrets.CTOAI_TOKEN }}
+        event_name: "deployment"
+        event_action: "Succeeded"
+        branch: "main"
+        repo: "prompt_res.repo"
+      
+      
