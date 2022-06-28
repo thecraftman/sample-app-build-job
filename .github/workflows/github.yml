@@ -9,14 +9,6 @@ env:
 
 jobs:
   build-and-deploy:
-    name: Build and Deploy
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ env.NODE_VERSION }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ env.NODE_VERSION }}
     - name: Report Deployment Failed
       if: ${{ failure() }}
       uses: cto-ai/action@v1.2
