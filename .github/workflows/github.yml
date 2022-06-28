@@ -9,6 +9,10 @@ env:
 
 jobs:
   build-and-deploy:
+    name: deployment failed
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
     - name: Report Deployment Failed
       if: ${{ failure() }}
       uses: cto-ai/action@v1.2
@@ -19,4 +23,3 @@ jobs:
         event_name: "deployment"
         event_action: "failure"
         environment: "production"
-        repo: "https://github.com/thecraftman/cto-ai-insights"
