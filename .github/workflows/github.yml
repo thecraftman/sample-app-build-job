@@ -3,9 +3,6 @@ name: Deployment Metrics
 
 on: [push, pull_request, pull_request_review, release, pull_request_target]
 
-env:
-  NODE_VERSION: '15.x'
-
 
 jobs:
   build-and-deploy:
@@ -16,10 +13,11 @@ jobs:
     - name: Report Deployment Failed
       if: ${{ failure() }}
       uses: cto-ai/action@v1.2
-      id: ctoai-deployment-failed
+      id: ctoai-deployment-failure
       with:
         team_id: ${{ secrets.CTOAI_TEAM }}
         token: ${{ secrets.CTOAI_TOKEN }}
         event_name: "deployment"
         event_action: "failure"
-        environment: "production"
+        branch: "main"
+        repo: "prompt_res.repo"
