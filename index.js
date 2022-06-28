@@ -17,7 +17,7 @@ async function main() {
 
   const event = {
     event_name: 'deployment',
-    event_action: 'succeeded',
+    event_action: 'failure',
     branch: 'main',
     repo: prompt_res.repo,
   };
