@@ -12,7 +12,7 @@ jobs:
     - name: Report Deployment Succeeded
     #   if: ${{ success() }}
       uses: cto-ai/action@v1.2
-      id: ctoai-deployment-Succeeded
+      id: ctoai-action
       with:
         team_id: ${{ secrets.CTOAI_TEAM }}
         token: ${{ secrets.CTOAI_TOKEN }}
