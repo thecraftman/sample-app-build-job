@@ -1,0 +1,31 @@
+name: Deployment sample
+
+on: dispatch
+
+jobs:
+  build-and-deploy:
+    name: deployment failed
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    # Add here the Deployment steps
+    # ...
+    - name: Report Deployment Sucess
+      if: ${{ success() }}
+      uses: cto-ai/action@v1.2
+      id: ctoai-deployment-Succeeded
+      with:
+        team_id: ${{ secrets.CTOAI_TEAM }}
+        token: ${{ secrets.CTOAI_TOKEN }}
+        event_name: "deployment"
+        event_action: "succeeded"
+    - name: Report Deployment Failure
+      if: ${{ failure() }}
+      uses: cto-ai/action@v1.2
+      id: ctoai-deployment-failed
+      with:
+        team_id: ${{ secrets.CTOAI_TEAM }}
+        token: ${{ secrets.CTOAI_TOKEN }}
+        event_name: "deployment"
+        event_action: "failed"
+        environment: "production"
