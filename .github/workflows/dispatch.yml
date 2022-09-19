@@ -7,7 +7,7 @@ jobs:
     name: deployment failed
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    # - uses: actions/checkout@v2
     # Add here the Deployment steps
     # ...
     - name: Report Deployment Sucess
@@ -27,5 +27,5 @@ jobs:
         team_id: ${{ secrets.CTOAI_TEAM }}
         token: ${{ secrets.CTOAI_TOKEN }}
         event_name: "deployment"
-        event_action: "failed"
+        event_action: "failure"
 
