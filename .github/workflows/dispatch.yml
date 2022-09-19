@@ -2,14 +2,14 @@ name: Deployment sample
 
 on: [push, pull_request, pull_request_review, release, pull_request_target]
 
-jobs:
-  build-and-deploy:
-    name: deployment failed
-    runs-on: ubuntu-latest
-    steps:
-    # - uses: actions/checkout@v2
-    # Add here the Deployment steps
-    # ...
+# jobs:
+#   build-and-deploy:
+#     name: deployment failed
+#     runs-on: ubuntu-latest
+#     steps:
+#     # - uses: actions/checkout@v2
+#     # Add here the Deployment steps
+#     # ...
     - name: Report Deployment Sucess
       if: ${{ success() }}
       uses: cto-ai/action@v1.2
