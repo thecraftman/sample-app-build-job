@@ -1,8 +1,6 @@
 name: Deployment sample
 
 on: [push, pull_request, pull_request_review, release, pull_request_target]
-  branches:
-    - main
 
 jobs:
   build-and-deploy:
@@ -21,13 +19,12 @@ jobs:
         token: ${{ secrets.CTOAI_TOKEN }}
         event_name: "deployment"
         event_action: "succeeded"
-    - name: Report Deployment Failure
-      if: ${{ failure() }}
-      uses: cto-ai/action@v1.2
-      id: ctoai-deployment-failed
-      with:
-        team_id: ${{ secrets.CTOAI_TEAM }}
-        token: ${{ secrets.CTOAI_TOKEN }}
-        event_name: "deployment"
-        event_action: "failure"
-
+#     - name: Report Deployment Failure
+#       if: ${{ failure() }}
+#       uses: cto-ai/action@v1.2
+#       id: ctoai-deployment-failed
+#       with:
+#         team_id: ${{ secrets.CTOAI_TEAM }}
+#         token: ${{ secrets.CTOAI_TOKEN }}
+#         event_name: "deployment"
+#         event_action: "failure"
